@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 const path = require('path');
 const chalk = require('chalk');
 const Sequelize = require('sequelize');

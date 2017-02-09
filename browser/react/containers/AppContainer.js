@@ -41,6 +41,7 @@ export default class AppContainer extends Component {
       this.setProgress(AUDIO.currentTime / AUDIO.duration));
   }
 
+
   onLoad (albums, artists) {
     this.setState({
       albums: convertAlbums(albums),
