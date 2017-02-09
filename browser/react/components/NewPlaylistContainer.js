@@ -1,16 +1,17 @@
 import React from 'react';
 import NewPlaylist from '../components/NewPlaylist';
 import axios from 'axios';
+import AppContainer from '../containers/AppContainer';
 
 
 export default class NewPlaylistContainer extends React.Component {
 
-	constructor(){
-		super()
+	constructor(props){
+		super(props)
 		this.state = {userInput: "", disabled: true, displayWarning: false, notYetPopulated: true, displayEmptyWarning: false}; 
-
-    this.makePlaylist = this.makePlaylist.bind(this); 
+    console.log("newplaylistcontainerprops", props); 
 	}
+  
 
 	setUserInput (input){
 		this.setState({userInput: input});
@@ -37,24 +38,21 @@ export default class NewPlaylistContainer extends React.Component {
     console.log("Submit!"); 
     const inputValue = this.state.userInput;
     this.setState({userInput: ""});
-    this.makePlaylist(inputValue);  
+    // AppContainer.makePlaylist(inputValue);  
     
   }
 
-  makePlaylist(input){
-    axios.post('/api/playlists', {name: input})
-      .then(res => res.data)
-      .then(result => {
-      console.log("I have posted!")
-      console.log(result) // response json from the server!
-    });
-  }
+  // makePlaylist(input){
+  //   axios.post('/api/playlists', {name: input})
+  //     .then(res => res.data)
+  //     .then(result => {
+  //     console.log("I have posted!")
+  //     console.log(result) // response json from the server!
+  //   });
+  // }
 
   render () { 
-  	// const inputValue = this.state.userInput;
-  	// const filteredArtists = this.props.artists.filter(artist =>
-   //  artist.name.match(inputValue));
-  	
+
   	return (
   		<div>
   		<NewPlaylist displayWarning= {this.state.displayWarning} displayEmptyWarning={this.state.displayEmptyWarning} disable={this.state.disabled} userInput={this.state.userInput} whenChanged={(input)=>this.setUserInput(input)} whenSubmitted={() => this.handleSubmit()} /> 
